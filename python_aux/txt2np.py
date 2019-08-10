@@ -1,5 +1,7 @@
-import matplotlib.pyplot as plt
+import sys
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Python program to convert a list 
 # of character 
@@ -17,10 +19,13 @@ def list2string(s):
     return new 
 
 # ==============================================================================  
-file_path = "./../Session.7.9.2019B.txt"
+file_path = sys.argv[1]
+# file_path = "./../Session.7.9.2019B.txt"
 
 # ==============================================================================  
-frame_id_signature = b'FRAME 1505'
+frame_id = sys.argv[2]
+frame_id_signature = bytes(frame_id, 'utf-8')
+#frame_id_signature = b'FRAME 1505'
 frame_id_signature_size = 10
 frame_signature_size = 5
 
@@ -66,6 +71,9 @@ for i, line in enumerate(matrix_string_list):
             string_list.append(cell) 
 
 matrix_np = matrix_np.reshape((32, 32))
+
+# ==============================================================================  
+np.savetxt("foo.csv", matrix_np, delimiter=",")
 
 # ==============================================================================  
 fig = plt.figure(figsize=(10, 10))
